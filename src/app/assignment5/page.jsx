@@ -34,6 +34,7 @@ export default function Assignment5Page() {
   const [postResult,     setPostResult]     = useState(null);
   const [callbackResult, setCallbackResult] = useState(null);
   const [productsResult, setProductsResult] = useState(null);
+  const [partCResult, setPartCResult] = useState(null);
 
   // ── Button 1: GET /api/assignment5 ────────────────────────────────────────
   // A GET request sends NO body.  We just call the URL.
@@ -76,7 +77,10 @@ export default function Assignment5Page() {
     const data = await callApi('/api/assignment5/products');
     setProductsResult(data);
   }
-
+async function handlePartC() {
+  const data = await callApi('/api/assignment5/partC');
+  setPartCResult(data);
+}
   // ─────────────────────────────────────────────────────────────────────────
   return (
     <div style={{ maxWidth: 800, margin: '40px auto', padding: '0 24px', fontFamily: 'sans-serif' }}>
@@ -139,6 +143,26 @@ export default function Assignment5Page() {
         )}
         <Result data={productsResult} />
       </Section>
+       {/* ── Section 4: Products from DB ─────────────────────────────────── */}
+      <Section title="Part c —  Fetch Vendors from Firestore" color="#e65100">
+        <p>
+          This route connects to Firestore on the <code>server</code>, fetches the{' '}
+          <code>products</code> collection, then loops through each document to count
+          total stock and calculate total inventory value.
+          Route: <code>src/app/api/assignment5/partc/route.js</code>
+        </p>
+        <Button label="Call GET /api/assignment5/products" onClick={handleProducts} />
+     </Section>
+      
+        {/* ── Part C ── */}
+<Section title="Part C — Vendors from Firestore" color="#00695c">
+  <p>
+    This route fetches the <code>vendors</code> collection and counts
+    how many are active. Route: <code>src/app/api/assignment5/partC/route.js</code>
+  </p>
+  <Button label="Call GET /api/assignment5/partC" onClick={handlePartC} />
+  <Result data={partCResult} />
+</Section>
     </div>
   );
 }
