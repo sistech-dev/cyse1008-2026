@@ -37,6 +37,8 @@ export async function GET(req) {
         amount_total: session.amount_total,
         currency: session.currency,
         orderId: session.metadata?.orderId ?? null,
+        customer_email: session.customer_email ?? null,
+
       });
     }
 
@@ -66,6 +68,8 @@ export async function GET(req) {
       amount_total: session.amount_total,
       currency: session.currency,
       orderId,
+      customer_email: session.customer_email ?? session.customer_details?.email ?? null,
+
     });
   } catch (err) {
     return NextResponse.json({ error: err.message || 'Stripe error' }, { status: 400 });

@@ -106,6 +106,7 @@ export default function CheckoutSuccessPage() {
         : null;
     return [
       { label: "Order ID", value: result.orderId || "—" },
+      { label: 'Customer email', value: result.customer_email || '—' },
       { label: "Stripe status", value: result.status || "pending" },
       { label: "Payment status", value: result.payment_status || "processing" },
       {
